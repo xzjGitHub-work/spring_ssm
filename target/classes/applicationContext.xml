@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			    http://www.springframework.org/schema/beans/spring-beans.xsd
+			    http://www.springframework.org/schema/context
+			    http://www.springframework.org/schema/context/spring-context.xsd
+			    http://www.springframework.org/schema/aop
+			    http://www.springframework.org/schema/aop/spring-aop.xsd
+			    http://www.springframework.org/schema/tx
+			    http://www.springframework.org/schema/tx/spring-tx.xsd
+			    http://www.springframework.org/schema/mvc
+			    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--开启组件扫描:今后扫描包创建任何对象，都必须具体到某一层-->
+    <context:component-scan base-package="com.myself.service"/>
+
+    <!--提供数据库连接池对象-->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3307/first_database"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!--把SqlSessionFactory对象交给IOC容器-->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--执行数据库操作的对象需要数据库链接信息-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--给pojo对象起别名-->
+        <property name="typeAliasesPackage" value="com.myself.domain"/>
+        <!--引入mybatis主配置文件，要进行settings相关配置的时候使用-->
+        <!--<property name="configLocation" value="classpath:SqlMapConfig.xml"/>-->
+    </bean>
+
+    <!--扫描dao接口包，生成代理对象，并把代理对象放入IOC容器中-->
+    <bean id="mapperScannerConfigurer"
+          class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.myself.dao"/>
+    </bean>
+
+
+    <!--提供事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--开启声明式事务注解支持-->
+    <tx:annotation-driven/>
+
+
+    <!--配置事务的通知-->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置aop-->
+    <aop:config>
+        <!--配置切入点表达式-->
+        <aop:pointcut id="pointcut" expression="execution(* com.myself.service.impl.*.*(..))"/>
+        <!--织入操作-->
+        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
+    </aop:config>
+
+
+    <!--引入log4j配置文件-->
+<!--    <context:property-placeholder location="/log4j.properties"/>-->
+
+
+</beans>
