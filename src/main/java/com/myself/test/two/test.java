@@ -174,6 +174,14 @@ public class test {
         return 0;
     }
 
+    public static Map<String, Map<String, String>> ruless = new HashMap<>();
+    private static Map<String, String> ruleOne;
+    @Test
+    public void test11() throws InterruptedException {
+        System.out.println(System.currentTimeMillis());
+        Thread.currentThread().sleep(500L);
+        System.out.println(System.currentTimeMillis());
+    }
 
 
 }
