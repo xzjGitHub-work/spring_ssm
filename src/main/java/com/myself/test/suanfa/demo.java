@@ -3,7 +3,6 @@ package com.myself.test.suanfa;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -67,7 +66,7 @@ public class demo {
             if (iterator.hasNext()) {
                 Character next = iterator.next();
                 iterator.remove();
-                node = new ListNode(Integer.parseInt(String.valueOf(next)), recursionFunction(iterator));
+                node = new ListNode(Integer.parseInt(java.lang.String.valueOf(next)), recursionFunction(iterator));
                 return node;
             }
             return null;
@@ -110,23 +109,107 @@ public class demo {
 输出："9534330"*/
     @Test
     public void test02() {
-        Integer[] nums = {10, 2};
-        String s = test02(nums);
-        System.out.println(s);
+        Integer[] nums = {10, 2, 23};
+        int[] numss = {10, 2, 23, 23, 2, 90};
+//        java.lang.String s = test02_1(nums);
+//        System.out.println(s);
+//        String string = test02_2(nums);
+        System.out.println(largestNumber(numss));
+    }
 
+    public java.lang.String test02_1(Integer[] nums) {
+        Arrays.sort(nums, Collections.reverseOrder());
+        StringBuilder builder = new StringBuilder();
+        List<char[]> list = new ArrayList<>();
+        List<ArrayList<char[]>> listArr = new ArrayList<>();
+        for (Integer num : nums) {
+            list.add(num.toString().toCharArray());
+        }
+        int max = 0;
+        //找出给定数组中最长位数
+        for (char[] chars : list) {
+            if (chars.length > max) {
+                max = chars.length;
+            }
+        }
+        //将相同位数的数据进行分类
+        for (int i = 0; i < max; i++) {
+            listArr.add(new ArrayList());
+        }
+        for (char[] chars : list) {
+            listArr.get(chars.length - 1).add(chars);
+        }
+        //循环不同的位数的数组
+        List<Integer> integerList = new ArrayList<>();
 
-
-
+        for (int i = 0; i < listArr.size(); i++) {
+            for (char[] o : listArr.get(i)) {
+                integerList.add(Integer.parseInt(new java.lang.String(o)));
+            }
+            Collections.sort(integerList, Collections.reverseOrder());
+            for (Integer integer : integerList) {
+                builder.append(integer);
+            }
+            integerList = new ArrayList<>();
+        }
+        return builder.toString();
 
     }
 
-    public String test02(Integer[] nums) {
-        Arrays.sort(nums, Collections.reverseOrder());
-        StringBuilder builder = new StringBuilder();
+    /*思路：
+     *   根据首个字母大小进行分组 从大到小排序
+     *   再将相同首字母的数据 根据第二个字母进行排序
+     *   */
+    public String test02_2(Integer[] nums) {
+        List<char[]> list = new ArrayList<>();
+        List<ArrayList<char[]>> arrayList = new ArrayList<>();
         for (Integer num : nums) {
             char[] chars = num.toString().toCharArray();
+            char c = chars[0];
+            if (arrayList.size() > 0) {
+                boolean result = false;
+                ArrayList<char[]> charsList = new ArrayList<>();
+                for (ArrayList<char[]> charss : arrayList) {
+                    if (c == charss.get(0)[0]) {
+                        charss.add(chars);
+                        break;
+                    } else {
+                        charsList.add(chars);
+                        result = true;
+                        break;
+                    }
+                }
+                if (result) {
+                    arrayList.add(charsList);
+                }
+            } else {
+                ArrayList<char[]> charsList = new ArrayList<>();
+                charsList.add(chars);
+                arrayList.add(charsList);
+            }
         }
-        System.out.println(JSONObject.toJSONString(nums));
-        return builder.toString();
+
+        System.out.println(JSONObject.toJSONString(arrayList));
+        return null;
+    }
+
+    public String largestNumber(int[] nums) {
+        return Arrays.stream(nums)
+                .boxed()
+                .map(i -> i.toString(i))
+                .sorted((s1, s2) -> {
+                    String sum1 = s1 + s2;
+                    String sum2 = s2 + s1;
+
+                    for (int i = 0; i < sum1.length(); i++) {
+                        if (sum1.charAt(i) != sum2.charAt(i)) {
+                            return sum2.charAt(i) - sum1.charAt(i);
+                        }
+                    }
+                    return 0;
+                })
+                .reduce(String::concat)
+                .filter(s -> !s.startsWith("0"))
+                .orElse("0");
     }
 }
