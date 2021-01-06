@@ -1,5 +1,6 @@
 package com.myself.test.suanfa;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
@@ -53,7 +54,7 @@ public class demo {
         Integer i = Integer.parseInt(builder1.toString()) + Integer.parseInt(builder2.toString());
         char[] chars = i.toString().toCharArray();
         List<Character> list = new ArrayList<>();
-        for (int j = chars.length-1; j >=0; j--) {
+        for (int j = chars.length - 1; j >= 0; j--) {
             list.add(chars[j]);
         }
         node = recursion.recursionFunction(list.iterator());
@@ -97,5 +98,35 @@ public class demo {
         }
         return pre.next;
 
+    }
+
+
+    /*给定一组非负整数 nums，重新排列它们每个数字的顺序（每个数字不可拆分）使之组成一个最大的整数。
+注意：输出结果可能非常大，所以你需要返回一个字符串而不是整数。
+
+输入：nums = [10,2]
+输出："210"
+输入：nums = [3,30,34,5,9]
+输出："9534330"*/
+    @Test
+    public void test02() {
+        Integer[] nums = {10, 2};
+        String s = test02(nums);
+        System.out.println(s);
+
+
+
+
+
+    }
+
+    public String test02(Integer[] nums) {
+        Arrays.sort(nums, Collections.reverseOrder());
+        StringBuilder builder = new StringBuilder();
+        for (Integer num : nums) {
+            char[] chars = num.toString().toCharArray();
+        }
+        System.out.println(JSONObject.toJSONString(nums));
+        return builder.toString();
     }
 }
