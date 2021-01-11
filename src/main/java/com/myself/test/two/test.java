@@ -1,10 +1,13 @@
 package com.myself.test.two;
 
 import com.alibaba.fastjson.JSONObject;
+import com.myself.utils.DateUtils;
 import com.myself.utils.ExcelParse;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -177,10 +180,16 @@ public class test {
     public static Map<String, Map<String, String>> ruless = new HashMap<>();
     private static Map<String, String> ruleOne;
     @Test
-    public void test11() throws InterruptedException {
-        System.out.println(System.currentTimeMillis());
-        Thread.currentThread().sleep(500L);
-        System.out.println(System.currentTimeMillis());
+    public void test11() throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "11");
+        JSONObject json = JSONObject.parseObject(JSONObject.toJSONString(map));
+        System.out.println(json.get("1"));
+        Date time = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        String format1 = format.format(time);
+        Date parse = format.parse(format1);
+
     }
 
 

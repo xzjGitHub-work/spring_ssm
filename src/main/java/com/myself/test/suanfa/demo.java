@@ -109,12 +109,20 @@ public class demo {
 输出："9534330"*/
     @Test
     public void test02() {
-        Integer[] nums = {10, 2, 23};
-        int[] numss = {10, 2, 23, 23, 2, 90};
+//        Integer[] nums = {10, 2, 23};
+//        int[] numss = {10, 2, 23, 23, 2, 90};
 //        java.lang.String s = test02_1(nums);
 //        System.out.println(s);
 //        String string = test02_2(nums);
-        System.out.println(largestNumber(numss));
+//        System.out.println(largestNumber(numss));
+        String sql = "select nec.serial_number,nec.title,nec.memo,nec.offereeA_name,nec.offereeB_name,nec.CREATE_TIME,nec.start_date,nec.end_date, necc.category_name ,\n" +
+                "case nec.state \n" +
+                "when 0 then '未签署'\n" +
+                "when 2 then '已签署'\n" +
+                "else '异常合同' end as state\n" +
+                "from nft_electronic_contract nec \n" +
+                "left join nft_electronic_contract_category necc on nec.contranct_id = necc.category_id";
+        System.out.println(sql);
     }
 
     public java.lang.String test02_1(Integer[] nums) {
@@ -193,6 +201,14 @@ public class demo {
         return null;
     }
 
+    /**
+     * @describe:最终方案
+     *
+     * @author:xzj
+     * @createDate:2021/1/7 9:29
+     * @param:[nums]
+     * @return:java.lang.String
+     */
     public String largestNumber(int[] nums) {
         return Arrays.stream(nums)
                 .boxed()
@@ -212,4 +228,6 @@ public class demo {
                 .filter(s -> !s.startsWith("0"))
                 .orElse("0");
     }
+
+
 }

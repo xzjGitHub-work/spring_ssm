@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -34,10 +35,13 @@ public class AccountController {
     }
 
     @RequestMapping("/findAll")
+    @ResponseBody
     public String findAll(Model model) {
-        List<Account> list = accountService.findAll();
-        model.addAttribute("list", list);
-        return "list";
+        System.out.println("访问到了");
+        System.out.println("account");
+//        List<Account> list = accountService.findAll();
+//        model.addAttribute("list", list);
+        return "访问到了";
     }
 
     @RequestMapping("/toAddPage")
