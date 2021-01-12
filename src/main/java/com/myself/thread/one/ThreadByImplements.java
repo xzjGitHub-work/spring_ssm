@@ -15,6 +15,8 @@ package com.myself.thread.one;
 5. 死亡（Dead）：线程执行完了或因异常退出了run()方法，则该线程结束生命周期。*/
 
 
+import com.myself.DesignMode.SingletonDemo;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -28,6 +30,9 @@ public class ThreadByImplements implements Runnable {
     @Override
     public void run() {
         System.out.println("继承方式的线程执行了");
+        SingletonDemo demo = SingletonDemo.getSingletonDemo();
+        demo.setName("修改了");
+
     }
 }
 

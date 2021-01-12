@@ -1,5 +1,7 @@
 package com.myself.thread.two;
 
+import com.myself.thread.one.ThreadByImplements;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,6 +19,8 @@ public class TestFixedThreadPool {
 
         Thread t2 = new MyThread("2");
 
+        ThreadByImplements threadByImplements = new ThreadByImplements();
+
         Thread t3 = new MyThread("3");
 
         Thread t4 = new MyThread("4");
@@ -28,6 +32,8 @@ public class TestFixedThreadPool {
         pool.execute(t1);
 
         pool.execute(t2);
+
+        pool.execute(threadByImplements);
 
         pool.execute(t3);
 
