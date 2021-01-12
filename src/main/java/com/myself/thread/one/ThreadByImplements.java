@@ -16,11 +16,6 @@ package com.myself.thread.one;
 
 
 import com.myself.DesignMode.SingletonDemo;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.ThreadPoolExecutor;
-
 /**
  * @Description: 继承方式实现线程
  * @Author: xzj
