@@ -17,6 +17,7 @@ package com.myself.thread.one;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @Description: 继承方式实现线程
@@ -71,4 +72,11 @@ class Test {
         System.out.println(Thread.currentThread().getName());
     }
 
+
+
+    class TestPool{
+        public void UseThreadPool(){
+//            new ThreadPoolExecutor();
+        }
+    }
 }
