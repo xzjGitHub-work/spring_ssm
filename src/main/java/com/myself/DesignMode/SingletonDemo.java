@@ -21,9 +21,9 @@ public class SingletonDemo {
     }
 
     public static SingletonDemo getSingletonDemo() {
-        if (singletonDemo == null){
-            synchronized (""){
-                if (singletonDemo == null){
+        if (singletonDemo == null) {
+            synchronized ("") {
+                if (singletonDemo == null) {
                     singletonDemo = new SingletonDemo();
                 }
             }

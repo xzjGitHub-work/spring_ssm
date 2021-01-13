@@ -16,6 +16,7 @@ package com.myself.thread.one;
 
 
 import com.myself.DesignMode.SingletonDemo;
+
 /**
  * @Description: 继承方式实现线程
  * @Author: xzj
@@ -33,7 +34,6 @@ public class ThreadByImplements implements Runnable {
 
 /**
  * @describe: 继承的方式
- *
  * @author:xzj
  * @createDate:2021/1/11 9:45
  * @param:
@@ -50,7 +50,6 @@ class ThreadByExtend extends Thread {
 
 /**
  * @describe:测试
- *
  * @author:xzj
  * @createDate:2021/1/11 9:46
  * @param:
@@ -62,7 +61,7 @@ class Test {
         //new ThreadByExtend存放在堆中();
         ThreadByExtend threadByExtend = new ThreadByExtend();
         threadByExtend.setPriority(10);
-        System.err.println("继承方式线程优先等级"+threadByExtend.getPriority());
+        System.err.println("继承方式线程优先等级" + threadByExtend.getPriority());
         threadByExtend.start();
         ThreadByImplements threadByImplements = new ThreadByImplements();
         System.err.println("实现的方式线程优先等级：");
@@ -73,9 +72,8 @@ class Test {
     }
 
 
-
-    class TestPool{
-        public void UseThreadPool(){
+    class TestPool {
+        public void UseThreadPool() {
 //            new ThreadPoolExecutor();
         }
     }
