@@ -23,7 +23,7 @@ public class TestFixedThreadPool {
 
         Thread t3 = new MyThread("3");
 
-        Thread t4 = new MyThread("4");
+        Thread t4 = new MyThread();
 
         Thread t5 = new MyThread("5");
 

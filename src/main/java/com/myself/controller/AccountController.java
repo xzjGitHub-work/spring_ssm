@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -67,6 +68,14 @@ public class AccountController {
     public String updateAccount(Account account) {
         accountService.updateAccount(account);
         return "redirect:findAll";
+    }
+
+    @RequestMapping("/getParam")
+    @ResponseBody
+    public String getParam(HttpServletRequest request) {
+        String queryString = request.getQueryString();
+        System.out.println(queryString);
+        return "请求到了";
     }
 
 
