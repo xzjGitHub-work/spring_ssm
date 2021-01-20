@@ -11,8 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -143,7 +145,7 @@ public class test {
     @Test
     public void test04() throws FileNotFoundException {
 //        int[] iArr = {2,4,1};
-        int[] iArr = {1,2,4};
+        int[] iArr = {1, 2, 4};
         System.out.println(maxProfit(2, iArr));
     }
 
@@ -153,39 +155,48 @@ public class test {
     public int maxProfit(int k, int[] prices) {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < prices.length; i++) {
-            if (i+1 == prices.length) {
+            if (i + 1 == prices.length) {
                 break;
             }
-            for (int j = i+1 ; j < prices.length; j++) {
-                map.put("第" + (i+1) + "天买入,第" + (j+1) + "天卖出", prices[j] - prices[i]);
+            for (int j = i + 1; j < prices.length; j++) {
+                map.put("第" + (i + 1) + "天买入,第" + (j + 1) + "天卖出", prices[j] - prices[i]);
             }
         }
         Set<Map.Entry<String, Integer>> mapEntries = map.entrySet();
         List<Map.Entry<String, Integer>> aList = new LinkedList<>(mapEntries);
-        Integer account = 0 ;
-            Collections.sort(aList, new Comparator<Map.Entry<String, Integer>>() {
-                @Override
-                public int compare(Map.Entry<String, Integer> ele1,Map.Entry<String, Integer> ele2) {
-                    return ele2.getValue().compareTo(ele1.getValue());
+        Integer account = 0;
+        Collections.sort(aList, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> ele1, Map.Entry<String, Integer> ele2) {
+                return ele2.getValue().compareTo(ele1.getValue());
 
-                }
+            }
 
-            });
-            if (aList.size() > k){
-                for (int i = 0; i < k; i++) {
-                    Map.Entry<String, Integer> entry = aList.get(i);
-                    if (entry.getValue()>0){
-                        account = account+entry.getValue();
-                    }
-                }
-            }else {
-                for (Map.Entry<String, Integer> entry : aList) {
-                    if (entry.getValue()>0){
-                        account = account+entry.getValue();
-                    }
+        });
+        if (aList.size() > k) {
+            for (int i = 0; i < k; i++) {
+                Map.Entry<String, Integer> entry = aList.get(i);
+                if (entry.getValue() > 0) {
+                    account = account + entry.getValue();
                 }
             }
+        } else {
+            for (Map.Entry<String, Integer> entry : aList) {
+                if (entry.getValue() > 0) {
+                    account = account + entry.getValue();
+                }
+            }
+        }
         System.out.println("222");
         return account;
     }
+
+    @Test
+    public void test21() {
+        Double d = 114.999999;
+        d = d * 10000;
+        d = Double.parseDouble(d.intValue() + "");
+        System.out.println(d/10000);
+    }
 }
+
