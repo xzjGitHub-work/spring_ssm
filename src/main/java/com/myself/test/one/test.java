@@ -193,10 +193,17 @@ public class test {
 
     @Test
     public void test21() {
-        Double d = 114.999999;
-        d = d * 10000;
-        d = Double.parseDouble(d.intValue() + "");
-        System.out.println(d/10000);
+        Double d = 114.899999;
+//        d = d * 10000;
+//        d = Double.parseDouble(d.intValue() + "");
+//        System.out.println(d/10000);
+
+//        System.err.println(Math.round(d * 100) / 100);
+//        DecimalFormat format = new DecimalFormat("#.00");
+//        System.err.println(format.format(d));
+        d = d * 100;
+        System.out.println(d);
+        System.out.println(Double.parseDouble(d.intValue()+ "") /100);
     }
 }
 
