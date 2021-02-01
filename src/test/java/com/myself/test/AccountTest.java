@@ -235,51 +235,7 @@ public class AccountTest {
         return true;
     }
 
-    /**
-     * 方法作用描述：循环实体操作字段
-     *
-     * @return void
-     * @author xzj
-     * @createDate 2020/9/22 17:00
-     */
-    @Test
-    public void test08() throws Exception {
-        Account account = new Account();
-        account.setName("100");
-        account.setId(1);
-        account.setMoney("100");
-        Account o = (Account) encryptBean(account.getClass(), account);
-        System.out.println(o);
 
-    }
-
-
-    public Object encryptBean(Class aClass, Object o) throws Exception {
-        Field[] fields = aClass.getDeclaredFields();
-        List<Method> setMethods = new ArrayList<>();
-        List<Method> getMethods = new ArrayList<>();
-        for (int i = 0; i < fields.length; i++) {
-            String convert = getConvert(fields[i].getName());
-            if (fields[i].getType().toString().contains("java.lang.String")) {
-                setMethods.add(aClass.getDeclaredMethod("set" + convert, String.class));
-                getMethods.add(aClass.getDeclaredMethod("get" + convert));
-            }
-        }
-        for (int i = 0; i < getMethods.size(); i++) {
-            String invoke = (String) getMethods.get(i).invoke(o);
-            setMethods.get(i).invoke(o, "1");
-        }
-        return o;
-
-    }
-
-    public static String getConvert(String str) {
-        String first = str.substring(0, 1);
-        String after = str.substring(1); //substring(1),获取索引位置1后面所有剩余的字符串
-        first = first.toUpperCase();
-        after = after.toLowerCase();
-        return first + after;
-    }
 
     @Test
     public void test09() throws Exception {
