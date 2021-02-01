@@ -204,6 +204,20 @@ public class test {
         d = d * 100;
         System.out.println(d);
         System.out.println(Double.parseDouble(d.intValue()+ "") /100);
+//        ParserFactory.getParser().findAction(someInput).doSomething();
+
+
+    }
+    @Test
+    public void test22() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(12);
+        list.add(13);
+        list.add(14);
+        list.add(15);
+        List<Integer> collect = list.stream().filter(o -> o == 1).collect(Collectors.toList());
+        System.out.println(JSONObject.toJSONString(collect));
     }
 }
 

@@ -1,0 +1,3 @@
+<beans>
+    <bean id="UserModel" class="com.yunqi.xzj.factory.bean.UserModel"/>
+</beans>
