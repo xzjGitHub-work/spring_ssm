@@ -1,7 +1,8 @@
 package com.myself.Socket;
 
-import java.io.IOException;
-import java.io.InputStream;
+import org.junit.Test;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -25,12 +26,60 @@ public class Server {
         byte[] b = new byte[1024];
         // 4.2 据读取到字节数组中.
         int len = is.read(b);
-// 4.3 解析数组,打印字符串信息
+        // 4.3 解析数组,打印字符串信息
         String msg = new String(b, 0, len);
         System.out.println(msg);
-//5.关闭资源.
+        /*=========回复客户端信息========*/
+        // 5. 通过 socket 获取输出流
+        OutputStream out = server.getOutputStream();
+        // 6. 回写数据
+        out.write("我很好,谢谢你".getBytes());
+        out.close();
+        //5.关闭资源.
         is.close();
         server.close();
     }
 
+    @Test
+    public void test01() throws Exception {
+        System.out.println("服务器 启动..... ");
+        // 1. 创建服务端ServerSocket
+        ServerSocket serverSocket = new ServerSocket(6666);
+        // 2. 循环接收,建立连接
+        while (true) {
+            Socket accept = serverSocket.accept();
+        /*
+        3. socket对象交给子线程处理,进行读写操作
+        Runnable接口中,只有一个run方法,使用lambda表达式简化格式
+        */
+            new Thread(() -> {
+                try (//3.1 获取输入流对象
+                     BufferedInputStream bis = new BufferedInputStream(accept.getInputStream());
+                     //3.2 创建输出流对象, 保存到本地 .
+                     BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(System.currentTimeMillis() + ".jpg"));
+                ) {
+                    // 3.3 读写数据
+                    byte[] b = new byte[1024 * 8];
+                    int len;
+                    while ((len = bis.read(b)) != -1) {
+                        bos.write(b, 0, len);
+                    }
+                    // 4.=======信息回写===========================
+                    System.out.println("back ........");
+                    OutputStream out = accept.getOutputStream();
+                    out.write("上传成功".getBytes());
+                    out.close();
+                    //5. 关闭 资源
+                    bos.close();
+                    bis.close();
+                    accept.close();
+                    System.out.println("文件上传已保存");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        }
+
+    }
 }
