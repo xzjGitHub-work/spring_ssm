@@ -46,6 +46,7 @@ public class test02 {
                 }
             }
         }
+        System.out.println(JSONObject.toJSONString(list));
         for (Integer integer : list) {
             if (k == integer) {
                 result = true;
