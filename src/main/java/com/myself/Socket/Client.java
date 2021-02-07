@@ -1,8 +1,6 @@
 package com.myself.Socket;
 
-import org.junit.Test;
-
-import java.io.*;
+import java.io.OutputStream;
 import java.net.Socket;
 
 /**
