@@ -13,9 +13,10 @@ import java.util.ArrayList;
 public class test02 {
 //    给定一个整数数组 nums 和一个目标值 k，请实现一个方法判断 nums 中是否存在某个片段（即若干个相连元素）之和等于 k。要求时间复杂度为 O(n)。
 
-    //思路：
-    //      计算出集合所有元素可能出现和集合 比对集合中是否函数与k相同数据
+   
     public boolean checkSum(int[] nums, int k) {
+		//思路：
+		//      计算出集合所有元素可能出现和集合 比对集合中是否函数与k相同数据
         boolean result = false;
         boolean resultOne = true;
         // Write your code here.
