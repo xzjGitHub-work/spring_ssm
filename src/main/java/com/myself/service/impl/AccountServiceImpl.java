@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDao accountDao;

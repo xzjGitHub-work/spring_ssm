@@ -1,6 +1,5 @@
 package com.myself.controller;
 
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -33,7 +32,6 @@ public class ThreadPoolController {
     @RequestMapping(value = "/thread", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String download(String id) throws Exception{
-
         System.out.println(id);
         poolTaskExecutor.execute(new Runnable() {
             @Override
