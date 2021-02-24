@@ -32,7 +32,6 @@ public class CycleOperationField {
         Account o = (Account) encryptBean(account.getClass(), account);
         System.out.println();
         String name = o.getName();
-        System.out.println(AesUtil.decryptHex(name));
         System.out.println(o);
 
     }
@@ -54,7 +53,7 @@ public class CycleOperationField {
         }
         //循环所有的方法
         for (int i = 0; i < getMethods.size(); i++) {
-            setMethods.get(i).invoke(o, AesUtil.encryptHex((String)getMethods.get(i).invoke(o)));
+//            setMethods.get(i).invoke(o, AesUtil.encryptHex((String)getMethods.get(i).invoke(o)));
         }
         return o;
 //        return null;

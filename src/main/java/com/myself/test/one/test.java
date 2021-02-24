@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  * @Date 2020-07-13
  */
 public class test {
-
     //获取不重复的
 //    public static <T> List<T> getWithoutRepetitionElements(List<T> list){
 //        return list.stream()
@@ -193,21 +192,38 @@ public class test {
 
     @Test
     public void test21() {
-        Double d = 114.899999;
+        Double d = 1D;
+        System.out.println(d);
+
+        BigDecimal BigDecimalNumber = new BigDecimal(Double.toString(d));
+        double v = BigDecimalNumber.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
+        DecimalFormat format = new DecimalFormat("0.0000");
+        System.err.println(format.format(v));
+//        double v = Double.parseDouble(String.format("%.2f", d - 0.005));
+//        System.out.println(v);
+//        System.out.println(format.format(v));
+
+//        System.out.println(d.toString().substring(0, "114.9999".indexOf(".") + 3));
+//        BigDecimal bd = new BigDecimal(d);
+//        BigDecimal setScale = bd.setScale(2, bd.ROUND_DOWN);
+//        System.out.println(setScale);
 //        d = d * 10000;
 //        d = Double.parseDouble(d.intValue() + "");
 //        System.out.println(d/10000);
 
 //        System.err.println(Math.round(d * 100) / 100);
-//        DecimalFormat format = new DecimalFormat("#.00");
 //        System.err.println(format.format(d));
-        d = d * 100;
-        System.out.println(d);
-        System.out.println(Double.parseDouble(d.intValue()+ "") /100);
+//        d = d * 100;
+//        System.out.println(format.format(d));
+//        System.out.println(String.format("%.2f", d));
+//        String s = String.format(String.valueOf(d), "%.2f");
+//        System.out.println(s);
+//        System.out.println(Double.parseDouble(d.intValue()+ "")/100 );
 //        ParserFactory.getParser().findAction(someInput).doSomething();
 
 
     }
+
     @Test
     public void test22() {
         List<Integer> list = new ArrayList<>();
