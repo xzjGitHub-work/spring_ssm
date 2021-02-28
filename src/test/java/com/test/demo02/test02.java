@@ -3,13 +3,12 @@ package com.test.demo02;
 import com.alibaba.fastjson.JSONObject;
 import com.myself.test.UserInfo;
 import com.myself.test.UserInfoTest;
+import com.myself.test.suanfa.ListNode;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -129,28 +128,37 @@ public class test02 {
 // [{"age":10,"name":"111","property":["好","很好","非常好"]},{"name":"111","property":["好","很好","非常好"]}]}
     }
 
-    public static void main(String[] args) {
+    /**
+     * 方法作用描述:查询属性和名称完全相同的数据
+     *
+     * @author      xzj
+     * @createDate  2021/2/27 16:11
+     * @param :
+     * @return      void
+     */
+    @Test
+    public void test11() {
         ArrayList<UserInfoTest> list = new ArrayList<>();
         UserInfoTest info = new UserInfoTest();
         info.setName("111");
         info.setAge(10);
         List<String> infoList = new ArrayList<>();
-        infoList.add("好");
-        infoList.add("很好");
+        infoList.add("红色");
+        infoList.add("红斯");
         infoList.add("非常好");
         info.setProperty(infoList);
         UserInfoTest info2 = new UserInfoTest();
         info2.setName("111");
         List<String> infoList2 = new ArrayList<>();
-        infoList2.add("好");
-        infoList2.add("很好");
+        infoList2.add("红斯");
+        infoList2.add("红色");
         infoList2.add("非常好");
         info2.setProperty(infoList2);
         UserInfoTest info3 = new UserInfoTest();
         info3.setName("222");
         List<String> infoList3 = new ArrayList<>();
         infoList3.add("好");
-        infoList3.add("非常好");
+        infoList3.add("好非常好");
         infoList3.add("很好");
         info3.setProperty(infoList3);
         UserInfoTest info4 = new UserInfoTest();
@@ -164,27 +172,77 @@ public class test02 {
         list.add(info2);
         list.add(info3);
         list.add(info4);
-//        System.out.println(JSONObject.toJSONString(list));
-//Map<Object, List<BillFeeVO>> feeGroup = feeVOList.stream().filter(item->StringUtil.isNotBlank(item.getBizOperator())).collect(Collectors.groupingBy(BillFeeVO::getBizOperator)); // 增加了字段非空过滤
-//        Map<List<String>, List<UserInfoTest>> collect = list.stream().filter(o -> !StringUtils.isEmpty(o.getName())).collect(Collectors.groupingBy(UserInfoTest::getName));
-        Map<List<String>, List<UserInfoTest>> collect = list.stream().filter(o -> o.getProperty() != null).collect(Collectors.groupingBy(UserInfoTest::getProperty));
-//        List<UserInfo> collect = list.stream().filter(o -> !StringUtils.isEmpty(o.getName())).collect(Collectors.toList());
-        System.out.println(JSONObject.toJSONString(collect));
-//        Map<String, List<UserInfo>> collect = list.stream().collect(Collectors.groupingBy(d -> fetchGroupKey(d) ));
-//        System.err.println(JSONObject.toJSONString(collect));
+        for (UserInfoTest infoTest : list) {
+            Collections.sort(infoTest.getProperty());
+        }
+        Map<String, List<UserInfoTest>> collect = list.stream().collect(Collectors.groupingBy(o -> getCompareStr(o.getProperty(), o.getName())));
+        Set<String> strings = collect.keySet();
+        List<com.test.demo02.UserInfoTest> rusult = new ArrayList<>();
+        for (String string : strings) {
+            com.test.demo02.UserInfoTest test = new com.test.demo02.UserInfoTest();
+            test.setAge(collect.get(string).stream().mapToInt(p -> p.getAge()).sum());
+            test.setName(collect.get(string).get(0).getName());
+            test.setProperty(collect.get(string).get(0).getProperty());
+            rusult.add(test);
+        }
+        System.out.println(JSONObject.toJSONString(rusult));
 
-//        {["好","很好","不非常好"]:[{"name":"222","property":["好","很好","不非常好"]}],
-//            ["好","很好","非常好"]:[{"age":10,"name":"111","property":["好","很好","非常好"]},{"name":"111","property":["好","很好","非常好"]}]}
-//
-//        {["好","很好","不非常好"]:[{"name":"222","property":["好","很好","不非常好"]}],
-//            ["好","很好","非常好"]:[{"age":10,"name":"111","property":["好","很好","非常好"]},{"name":"111","property":["好","很好","非常好"]}]}
-
-        //{["好","非常好","很好"]:
-        // [{"name":"222","property":["好","非常好","很好"]}],
-        // ["好","很好","不非常好"]:
-        // [{"name":"222333","property":["好","很好","不非常好"]}],
-        // ["好","很好","非常好"]:[{"age":10,"name":"111","property":["好","很好","非常好"]},{"name":"111","property":["好","很好","非常好"]}]}
+    }
+    /**
+     * 方法作用描述
+     *
+     * @author      xzj
+     * @createDate  2021/2/27 16:16
+     * @param list,String str :
+     * @return
+     */
+    public String getCompareStr(List<String> list,String str){
+        StringBuilder builder = new StringBuilder();
+        for (String s : list) {
+            builder.append(s);
+        }
+        builder.append(str);
+        return builder.toString();
 
     }
 
+    @Test
+    public void test12(){
+//        ListNode node = new ListNode();
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(9);
+        list.add(8);
+        list.add(7);
+        list.add(6);
+        Collections.sort(list);
+        System.out.println(JSONObject.toJSONString(list));
+    }
+
+
+    @Test
+    public void test13(){
+
+
+
+    }
+    /**
+     * 方法作用描述：动态规划
+     *
+     * @author      xzj
+     * @createDate  2021/2/28 10:28
+
+     * @return      void
+     */
+    @Test
+    public void test14(){
+      int n=4;
+      int[] dp=new int[1000];
+      dp[1]=1;
+      dp[2]=2;
+      for(int i=2 ;i<n;i++){
+          dp[i+1]=dp[i]+dp[i-1];
+      }
+        System.err.println(dp[n]);
+    }
 }
