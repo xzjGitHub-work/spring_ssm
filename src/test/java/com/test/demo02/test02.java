@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.myself.test.UserInfo;
 import com.myself.test.UserInfoTest;
 import com.myself.test.suanfa.ListNode;
+import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -221,11 +223,39 @@ public class test02 {
 
 
     @Test
-    public void test13(){
+    public void test13(){}
 
+    @Test
+    public void test22(){
+        List<String> list = new ArrayList<>();
+        new Thread(){
+            @SneakyThrows
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    list.add(""+i);
+                    String name = Thread.currentThread().getName();
+                    System.out.println("name"+name);
+                    Thread.sleep(100);
+                }
+                System.out.println(list.size());
+            }
+        }.start();
 
+        new Thread(){
+            @Override
+            public void run() {
+                System.out.println("22222222");
+                for (String s : list) {
+                    System.err.println(s);
+                }
+            }
+        }.start();
 
+        System.out.println("======="+JSONObject.toJSONString(list));
     }
+
+
     /**
      * 方法作用描述：动态规划
      *
@@ -236,13 +266,22 @@ public class test02 {
      */
     @Test
     public void test14(){
-      int n=4;
+      int n=100;
       int[] dp=new int[1000];
+      dp[0]=0;
       dp[1]=1;
       dp[2]=2;
       for(int i=2 ;i<n;i++){
           dp[i+1]=dp[i]+dp[i-1];
+          System.out.println(i+":"+dp[i+1]);
       }
-        System.err.println(dp[n]);
+        System.err.println(dp[n-1]);
+    }
+    @Test
+    public void test15(){
+        Double d = 12.00;
+        DecimalFormat decimalFormat = new DecimalFormat("0");
+        System.err.println(d);
+        System.out.println(decimalFormat.format(d));
     }
 }
