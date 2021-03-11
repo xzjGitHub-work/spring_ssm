@@ -1,5 +1,7 @@
 package com.myself.test;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,9 +40,39 @@ public class test {
         userInfos.add(b);
         userInfos.add(c);
         userInfos.add(d);
-        HashSet<UserInfo> set = new HashSet<UserInfo>(userInfos);
-        System.out.println(set);
-        List<UserInfo> userInfos1 = getWithoutRepetitionElements(userInfos);
-        System.out.println(userInfos1);
+//        HashSet<UserInfo> set = new HashSet<UserInfo>(userInfos);
+//        System.out.println(set);
+//        List<UserInfo> userInfos1 = getWithoutRepetitionElements(userInfos);
+//        System.out.println(userInfos1);
+        //userInfos集合中的对象的name全部都不是a返回true
+        boolean result = userInfos.stream().noneMatch(o -> "a".equals(o.getName()));
+        System.out.println("result = "+result);
+        //userInfos集合中的对象的name有满足的返回true
+        boolean result2 = userInfos.stream().anyMatch(o -> "a".equals(o.getName()));
+        System.out.println("result2 = "+result2);
+        //userInfos结合中的对象的name全部满足返回true
+        boolean result3 = userInfos.stream().allMatch(o -> "a".equals(o.getName()));
+        System.out.println("result3 = "+result3);
+    }
+    @Test
+    public void test01(){
+        List<UserInfo> userInfos = new ArrayList<>();
+        UserInfo a = new UserInfo("a",14,"hn");
+        UserInfo b = new UserInfo("a",14,"hb");
+        UserInfo c = new UserInfo("b",14,"hn");
+        UserInfo d = new UserInfo("ss",14,"hn");
+        userInfos.add(a);
+        userInfos.add(b);
+        userInfos.add(c);
+        userInfos.add(d);
+        //userInfos集合中的对象的name全部都不是a返回true
+        boolean result = userInfos.stream().noneMatch(o -> "a".equals(o.getName()));
+        System.out.println("result = "+result);
+        //userInfos集合中的对象的name有满足的返回true
+        boolean result2 = userInfos.stream().anyMatch(o -> "a".equals(o.getName()));
+        System.out.println("result2 = "+result2);
+        //userInfos结合中的对象的name全部满足返回true
+        boolean result3 = userInfos.stream().allMatch(o -> "a".equals(o.getName()));
+        System.out.println("result3 = "+result3);
     }
 }
