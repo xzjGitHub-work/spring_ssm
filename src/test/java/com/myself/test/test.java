@@ -1,5 +1,6 @@
 package com.myself.test;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -74,5 +75,13 @@ public class test {
         //userInfos结合中的对象的name全部满足返回true
         boolean result3 = userInfos.stream().allMatch(o -> "a".equals(o.getName()));
         System.out.println("result3 = "+result3);
+    }
+    @Test
+    public void test02(){
+        Object o = new Object();
+        o = new UserInfo("a",14,"hn");
+        if (o instanceof UserInfo){
+            System.out.println("1111");
+        }
     }
 }
