@@ -3,9 +3,14 @@ package com.myself.test;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -83,5 +88,27 @@ public class test {
         if (o instanceof UserInfo){
             System.out.println("1111");
         }
+    }
+
+    @Test
+    public void test03(){
+//        System.out.println(LocalDate.now());
+//        LocalDate of = LocalDate.of(2020, 2, 28);
+//        int i =0 ;
+//        while (LocalDate.now().compareTo(of) != 0){
+//            System.out.println(i++);
+//            of = of.plusDays(1);
+//        }
+        System.out.println(LocalDate.now().format(DateTimeFormatter.ISO_DATE) + " 00:00:00");
+                LocalDate of = LocalDate.of(2021, 3, 17);
+        System.out.println(of.toEpochDay());
+        System.out.println(LocalDate.now().toEpochDay());
+        BigDecimal bigDecimal = new BigDecimal("1222");
+        BigDecimal bigDecimal1 = new BigDecimal("10000");
+        System.out.println(RoundingMode.HALF_DOWN);
+        System.err.println(bigDecimal.divide(bigDecimal1,6, RoundingMode.HALF_DOWN).doubleValue());
+        System.out.println(Math.log(bigDecimal.divide(bigDecimal1,6, RoundingMode.HALF_DOWN).doubleValue()));
+        System.out.println(Math.log(100));
+
     }
 }

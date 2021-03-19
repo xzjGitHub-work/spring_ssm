@@ -46,32 +46,32 @@
     </bean>
 
 
-    <!--提供事务管理器-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+<!--    &lt;!&ndash;提供事务管理器&ndash;&gt;-->
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
 
     <!--开启声明式事务注解支持-->
-    <tx:annotation-driven/>
+<!--    <tx:annotation-driven/>-->
 
 
     <!--配置事务的通知-->
-    <tx:advice id="advice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="find*" read-only="true"/>
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-    <!--配置aop-->
-    <aop:config>
-        <!--配置切入点表达式-->
-        <aop:pointcut id="pointcut" expression="execution(* com.myself.service.impl.*.*(..))"/>
-        <!--织入操作-->
-        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
-    </aop:config>
+<!--    <tx:advice id="advice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            <tx:method name="save*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="update*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="delete*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="find*" read-only="true"/>-->
+<!--            <tx:method name="*"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+<!--    &lt;!&ndash;配置aop&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash;配置切入点表达式&ndash;&gt;-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.myself.service.impl.*.*(..))"/>-->
+<!--        &lt;!&ndash;织入操作&ndash;&gt;-->
+<!--        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>-->
+<!--    </aop:config>-->
 
 
     <!--引入log4j配置文件-->
