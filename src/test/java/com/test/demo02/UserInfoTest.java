@@ -2,9 +2,7 @@ package com.test.demo02;
 
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +41,7 @@ public class UserInfoTest {
     public void setProperty(List<String> property) {
         this.property = property;
     }
+
     public static void main(String[] args) {
         ArrayList<com.myself.test.UserInfoTest> list = new ArrayList<>();
         com.myself.test.UserInfoTest info = new com.myself.test.UserInfoTest();
@@ -71,9 +70,9 @@ public class UserInfoTest {
         info4.setName("222333");
         List<String> infoList4 = new ArrayList<>();
         infoList4.add("good");
-        infoList4.add("veryGood");
         infoList4.add("veryveryGood");
-        info3.setProperty(infoList4);
+        infoList4.add("veryGood");
+        info4.setProperty(infoList4);
         list.add(info);
         list.add(info2);
         list.add(info3);
@@ -81,10 +80,19 @@ public class UserInfoTest {
 //        System.out.println(JSONObject.toJSONString(list));
 //Map<Object, List<BillFeeVO>> feeGroup = feeVOList.stream().filter(item->StringUtil.isNotBlank(item.getBizOperator())).collect(Collectors.groupingBy(BillFeeVO::getBizOperator)); // 增加了字段非空过滤
 //        Map<List<String>, List<UserInfoTest>> collect = list.stream().filter(o -> !StringUtils.isEmpty(o.getName())).collect(Collectors.groupingBy(UserInfoTest::getName));
-        Map<List<String>, List<com.myself.test.UserInfoTest>> collect = list.stream().filter(o -> o.getProperty() != null).collect(Collectors.groupingBy(com.myself.test.UserInfoTest::getProperty));
+        for (com.myself.test.UserInfoTest test : list) {
+            System.out.println(test);
+            Collections.sort(test.getProperty());
+        }
+        System.err.println(JSONObject.toJSONString(list));
+        list.stream().filter(o -> o.getProperty() != null).forEach(o -> {
+            Collections.sort(o.getProperty());
+        });
+
+        Map<List<String>, List<com.myself.test.UserInfoTest>> collect = list.stream().filter(o -> o.getProperty() != null).collect(Collectors.groupingBy(oo -> oo.getProperty()));
 //        List<UserInfo> collect = list.stream().filter(o -> !StringUtils.isEmpty(o.getName())).collect(Collectors.toList());
         System.out.println(JSONObject.toJSONString(collect));
-        System.out.println(collect.toString());
+        System.out.println(JSONObject.toJSONString(collect.size()));
 //        Map<String, List<UserInfo>> collect = list.stream().collect(Collectors.groupingBy(d -> fetchGroupKey(d) ));
 //        System.err.println(JSONObject.toJSONString(collect));
 

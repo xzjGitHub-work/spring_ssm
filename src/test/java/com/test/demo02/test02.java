@@ -1,18 +1,19 @@
 package com.test.demo02;
 
-import com.alibaba.fastjson.JSONObject;
-import com.myself.test.UserInfo;
-import com.myself.test.UserInfoTest;
-import com.myself.test.suanfa.ListNode;
-import lombok.SneakyThrows;
-import org.junit.Test;
-import org.springframework.util.StringUtils;
+        import com.alibaba.fastjson.JSONObject;
+        import com.myself.test.UserInfo;
+        import com.myself.test.UserInfoTest;
+        import com.myself.util.DateUtils;
+        import lombok.SneakyThrows;
+        import org.apache.activemq.store.kahadb.disk.index.ListNode;
+        import org.junit.Test;
+        import org.springframework.util.StringUtils;
 
-import java.lang.reflect.Array;
-import java.text.DecimalFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+        import java.lang.reflect.Array;
+        import java.text.DecimalFormat;
+        import java.util.*;
+        import java.util.stream.Collectors;
+        import java.util.stream.Stream;
 
 /**
  * @Description: 作用描述
@@ -266,22 +267,41 @@ public class test02 {
      */
     @Test
     public void test14(){
-      int n=100;
-      int[] dp=new int[1000];
-      dp[0]=0;
-      dp[1]=1;
-      dp[2]=2;
-      for(int i=2 ;i<n;i++){
-          dp[i+1]=dp[i]+dp[i-1];
-          System.out.println(i+":"+dp[i+1]);
-      }
+        int n=100;
+        int[] dp=new int[1000];
+        dp[0]=0;
+        dp[1]=1;
+        dp[2]=2;
+        for(int i=2 ;i<n;i++){
+            dp[i+1]=dp[i]+dp[i-1];
+            System.out.println(i+":"+dp[i+1]);
+        }
         System.err.println(dp[n-1]);
     }
     @Test
     public void test15(){
-        Double d = 12.00;
-        DecimalFormat decimalFormat = new DecimalFormat("0");
-        System.err.println(d);
-        System.out.println(decimalFormat.format(d));
+        Object s = "11";
+        if (s instanceof  String){
+            System.out.println("String" + s);
+        }
+        if (s instanceof  Integer){
+            System.out.println("Integer" + s);
+        }
+
+    }
+
+    @Test
+    public void test16(){
+        Object s = "11";
+        if (s instanceof  String){
+            System.out.println("String" + s);
+        }
+        if (s instanceof  Integer){
+            System.out.println("Integer" + s);
+        }
+
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        return null;
     }
 }
