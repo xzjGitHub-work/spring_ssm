@@ -6,8 +6,10 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,5 +36,23 @@ public class Demo {
         UserModel userModel = (UserModel)mapData.get("UserModel");
         System.out.println(userModel.getUserModel());
         System.out.println(stream);
+    }
+
+
+    @Test
+    public void test01(){
+        List<String> list = new ArrayList<>();
+        List<String> listTwo = new ArrayList<>();
+        listTwo.add("1111");
+        list.add("http://172.16.68.195:8901");
+        System.out.println(list.stream().noneMatch("http://172.16.68.195:8901/"::contains));
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("list",list);
+        map.put("listTwo",listTwo);
+        map.forEach((key,list1) ->{
+            for (String s : list1) {
+                System.out.println(s);
+            }
+        });
     }
 }
