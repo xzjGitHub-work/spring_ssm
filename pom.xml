@@ -204,6 +204,13 @@
             <artifactId>cglib</artifactId>
             <version>3.2.5</version>
         </dependency>
+        <!--ansj-->
+        <dependency>
+            <groupId>org.nlpcn</groupId>
+            <artifactId>nlp-lang</artifactId>
+            <version>1.7.7</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
