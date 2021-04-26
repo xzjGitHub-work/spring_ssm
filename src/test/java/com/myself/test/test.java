@@ -111,4 +111,27 @@ public class test {
         System.out.println(Math.log(100));
 
     }
+
+    /**
+     * @describe:数组初始化值
+     *
+     * @author:xzj
+     * @createDate:2021/4/26 15:47
+     * @param:[]
+     * @return:void
+     */
+    @Test
+    public void test04(){
+        //int初始化值0
+        int[] ints = new int[10];
+        System.out.println(JSONObject.toJSONString(ints));
+        //String初始化值null
+        String[] strings = new String[10];
+        System.out.println(JSONObject.toJSONString(strings));
+        //Integer初始化值0
+        Integer[] integers = new Integer[10];
+        System.out.println(JSONObject.toJSONString(integers ));
+
+
+    }
 }
