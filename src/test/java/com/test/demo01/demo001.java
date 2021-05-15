@@ -1,5 +1,6 @@
 package com.test.demo01;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
@@ -27,22 +28,22 @@ public class demo001 {
 
     @Test
     public void test01() {
-        log.info("这是lombok的日志");
-        log.error("这是lombok的日志");
-        log.debug("这是lombok的日志");
-        int i = 1;
-        switch (1) {
-            case 1:
-                System.out.println("1");
-                break;
-            case 2:
-                System.out.println("2");
-                break;
-        }
-        str = null;
-        System.out.println("".isEmpty());
-        System.out.println(StringUtils.isEmpty(str));
-        System.out.println(StringUtils.cleanPath(str1));
-        System.out.println(str1);
+        String s ="[\n" +
+                "    [\"lxwz\",\n" +
+                "        {\"indexName\":\"guowang_lxwz\",\n" +
+                "         \"paramList\":[{\"prodCatBigId,prodCatMidId,prodCatSmallId\":\"cg,22023,22023020\"},\n" +
+                "                      {\"prodBrandId\":\"00020746\"},\n" +
+                "                      {\"storeId\":\"597E4D47AE98A778\"}\n" +
+                "                    ],\n" +
+                "         \"prodId\":\"0007043002\",\n" +
+                "         \"size\":9,\n" +
+                "         \"userId\":\"068cfa247c044851a4caa9acb7450a38\"\n" +
+                "        }\n" +
+                "    ] \n" +
+                "\n" +
+                "]\n";
+        System.out.println(JSONObject.toJSONString(s));
     }
+
+
 }
