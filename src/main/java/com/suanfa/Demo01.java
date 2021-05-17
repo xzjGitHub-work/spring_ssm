@@ -204,4 +204,47 @@ public class Demo01 {
         System.out.println(a.trim());
     }
 
+
+
+    /*给定一个整数数组 nums，找到一个具有最大和的连续子数组（子数组最少包含一个元素）。要求2小时内完成：（1）返回其最大和。（2）至少给出两种解法，并分别评估复杂度。*/
+
+    @Test
+    public void test08(){
+        int[] nums = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+
+        if (nums.length == 0) {
+//            return 0;
+        }
+        int[] resultArr = new int[nums.length];
+        resultArr[0] = nums[0];
+        int result = resultArr[0];
+        for (int i = 1; i < nums.length; i++) {
+            resultArr[i] = Math.max(nums[i], resultArr[i - 1] + nums[i]);
+        }
+        System.out.println(JSONObject.toJSONString(resultArr));
+        for (int i : resultArr) {
+            result = Math.max(result,i);
+        }
+        System.out.println(result);
+    }
+
+    @Test
+    public void test09(){
+        int[] nums = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+
+        if (nums.length == 0) {
+//            return 0;
+        }
+        int result = nums[0] ,res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            res = Math.max(nums[i], res + nums[i]);
+            result = Math.max(res,result);
+        }
+        System.out.println(result);
+//        System.out.println(JSONObject.toJSONString(resultArr));
+//        for (int i : resultArr) {
+//            result = Math.max(result,i);
+//        }
+    }
+
 }
