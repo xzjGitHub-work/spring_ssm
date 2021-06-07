@@ -16,7 +16,7 @@ public class test {
     @Test
     @MyAnnotations(name = "1111")
     public void test02() {
-        System.out.println("name");
+
     }
 
 
