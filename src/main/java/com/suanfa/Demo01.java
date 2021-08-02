@@ -5,6 +5,7 @@ import com.myself.test.suanfa.ListNode;
 import org.junit.Test;
 import org.omg.PortableInterceptor.INACTIVE;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -245,6 +246,30 @@ public class Demo01 {
 //        for (int i : resultArr) {
 //            result = Math.max(result,i);
 //        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{0,1,2,2,3,0,4,2};
+        int val = 2;
+        int l = arr.length;
+        int a = 0;
+        for(int i=0;i<arr.length;i++){
+            if(i == val){
+                for(int j=0;i<arr.length;j++){
+                    if(arr[j] != arr[i]){
+                        a = arr[j];
+                        arr[j]=arr[i];
+                        arr[i] = a;
+                    }
+                }
+                l--;
+            }
+        }
+        System.out.println(l);
+        for(int i : arr){
+            System.out.println(i);
+        }
+
     }
 
 }
